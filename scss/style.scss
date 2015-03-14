@@ -1,0 +1,58 @@
+
+$color: green;
+$padding: 20px;
+
+@mixin border($value){
+	-webkit-border-radius: $value;
+	-moz-border-radius: $value;
+	-o-border-radius: $value;
+	border-radius: $value;
+}
+
+@mixin break($point) {
+  @if $point == l {
+	@media (max-width: 1824px) { @content; }
+  }
+  @else if $point == m {
+	@media (max-width: 1024px) { @content; }
+  }
+  @else if $point == s {
+	@media (max-width: 480px)  { @content; }
+  }
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+	-webkit-transition: $transition-property $transition-time $method;
+	-moz-transition: $transition-property $transition-time $method;
+	-ms-transition: $transition-property $transition-time $method;
+	-o-transition: $transition-property $transition-time $method;
+	transition: $transition-property $transition-time $method;
+}
+
+body{
+	background-color: $color;
+	padding:$padding;
+}
+
+.content{
+	background-color: white;
+
+	@include transition(all, 0.5s,ease-in);
+
+	@include break(l){
+		@include border(40px);
+		padding: $padding*2;
+	}
+
+	@include break(m){
+		@include border(40px);
+		padding: $padding;
+		background-color: red;
+	}
+
+	@include break(s){
+		padding: $padding/2;
+		background-color: orange;
+	}
+}
+
